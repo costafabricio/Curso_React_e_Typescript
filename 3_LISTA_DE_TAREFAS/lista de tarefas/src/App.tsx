@@ -1,7 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 
 function App() {
+  const inputRef = useRef<HTMLInputElement>(null)
+  const firtsRender = useRef(true)
+
   const [input, setInput] = useState("")
   const [tasks, setTasks] = useState<string[]>([])
 
@@ -9,6 +12,26 @@ function App() {
     enabled: false,
     task: ''
   })
+
+  useEffect(()=> {
+    const tarefaSalvas = localStorage.getItem('@cursoreact')
+
+      if(tarefaSalvas) {
+        setTasks(JSON.parse(tarefaSalvas))
+      }
+  }, [])
+
+  useEffect(() => {
+
+    if(firtsRender.current) {
+      firtsRender.current = false
+      return
+    }
+
+    localStorage.setItem('@cursoreact', JSON.stringify(tasks))
+    console.log("useEFFEcts foi chamado")
+
+  }, [tasks])
 
   function handleRegister(){
     if(!input){
@@ -44,6 +67,7 @@ function App() {
   }
 
   function handleEdit(item: string) {
+    inputRef.current?.focus()
     setInput(item)
     setEditTask({
       enabled: true,
@@ -60,6 +84,7 @@ function App() {
        placeholder='Digite o nome da tarefa' 
        value={input}
        onChange={(e) => setInput(e.target.value)}
+       ref={inputRef}
        />
 
        <button onClick={handleRegister}> {editTask.enabled ? "Atualizar tarefa" : "Adicionar tarefa"} </button>
