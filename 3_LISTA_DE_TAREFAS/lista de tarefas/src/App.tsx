@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import './App.css'
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
 
   }, [tasks])
 
-  function handleRegister(){
+  const handleRegister = useCallback(() => {
     if(!input){
       alert("Preencha o nome da tarefa")
     }
@@ -45,7 +45,10 @@ function App() {
 
     setTasks(tarefas => [...tarefas, input])
     setInput("")
-  }
+  
+  }, [input, tasks])
+
+ 
 
   function handleSaveEdit(){
     const findIndexTask = tasks.findIndex(task => task === editTask.task)
@@ -76,6 +79,10 @@ function App() {
 
   }
 
+  const totalTarefas = useMemo(() => {
+    return tasks.length
+  }, [tasks])
+
   return (
     <div>
        <h1>Lista de tarefas</h1>
@@ -90,6 +97,9 @@ function App() {
        <button onClick={handleRegister}> {editTask.enabled ? "Atualizar tarefa" : "Adicionar tarefa"} </button>
 
        <hr />
+
+       <strong>Voce tem {totalTarefas} tarefas!</strong>
+       <br /><br />
        {tasks.map( (item, index) => (
           <section key={item}>
             <span>{item}</span>
