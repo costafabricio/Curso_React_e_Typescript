@@ -1,8 +1,35 @@
 import { Social } from "../../components/social"
 
 import {FaFacebook, FaInstagram, FaYoutube, FaLinkedin, FaGithub} from 'react-icons/fa'
+import { db } from "../../services/firebaseConnection"
+import {
+   getDocs,
+   collection,
+   orderBy,
+   query,
+   doc,
+   getDoc
+} from 'firebase/firestore'
+import { useState } from "react";
+
+interface LinkProps {
+  id: string;
+  name: string;
+  url: string;
+  bg: string;
+  color: string;
+}
+
+interface SocialLinksProps {
+  instagram: string;
+  youtube: string;
+  facebook: string;
+}
 
 export function Home(){
+    const [links, setLinks] = useState<LinkProps[]>([])
+    const [socialLinks, setSocialLinks] = useState<SocialLinksProps>()
+
     return (
         <div className="flex flex-col w-full py-4 items-center justify-center">
             <h1 className="md:text-4xl text-3xl font-bold text-white mt-20">Fabricio Costa</h1>
