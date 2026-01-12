@@ -1,6 +1,6 @@
 import { Social } from "../../components/social"
 
-import {FaFacebook, FaInstagram, FaYoutube, FaLinkedin, FaGithub} from 'react-icons/fa'
+import {FaFacebook, FaInstagram, FaYoutube} from 'react-icons/fa'
 import { db } from "../../services/firebaseConnection"
 import {
    getDocs,
