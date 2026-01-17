@@ -8,7 +8,9 @@ export function Home() {
 
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-5">
                 <section className="w-full">
-                    <img className="w-full rounded-lg max-h-70 mb-2"/>
+                    <img className="w-full rounded-lg max-h-70 mb-2"
+                     src="https://sp.yimg.com/ib/th?id=OPHS.jrjcujrP9fL7WQ474C474&o=5&pid=21.1&w=160&h=105"
+                     alt="Logo produto"/>
 
                     <p className="font-medium mt-1 mb-2">Fone de ouvido</p>
 
@@ -20,7 +22,7 @@ export function Home() {
                             <BsCartPlus size={20} color="#FFF"/>
                         </button>
                     </div>
-                    
+
                 </section>
 
               </div>
